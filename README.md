@@ -1,10 +1,10 @@
-# GRCC Web Applications
+# GRCC Web Applications Classes
 For Grand Rapids Community College's Web Applications I &amp; II (CIS 241 &amp; CIS 247) classes. 
 
 This repository will help students in the creation of a web server with PHP support in Amazon Web Services (AWS) using a provided shell script.
 
 ## Check Your DNS Records
-The Domain Name System (DNS) is the phonebook of the Internet. Humans access information online through domain names, like nytimes.com or espn.com. Web browsers interact through Internet Protocol (IP) addresses. DNS translates domain names to IP addresses so browsers can load Internet resources. The process of updating the servers so that web browsers can find a site is called propagation. Officially, it can take up to 72 hours for a DNS entry to propagate, but often only takes 30 minutes or a few hours at most.
+_The Domain Name System (DNS) is the phonebook of the Internet. Humans access information online through domain names, like nytimes.com or espn.com. Web browsers interact through Internet Protocol (IP) addresses. DNS translates domain names to IP addresses so browsers can load Internet resources. The process of updating the servers so that web browsers can find a site is called propagation. Officially, it can take up to 72 hours for a DNS entry to propagate, but often only takes 30 minutes or a few hours at most._
 
 Before you begin, check to make sure your DNS records have been set up correctly:
 
