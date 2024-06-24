@@ -45,7 +45,7 @@ sudo nano install-lamp-secure.sh
 3. Open this on GitHub in a new tab: [install-lamp-secure.sh](./install-lamp-secure.sh) (right click to open in new tab).
 4. Copy the script by clicking the copy button in the upper right corner next to the <kbd>Raw</kbd> button or select all of the text in the code box and press <kbd>Ctrl + C</kbd> to copy.
 5. Back in 'nano', paste the script into the text editor.
-6. Save the file by pressing <kbd>Ctrl + X</kbd> then press `y` then `Enter` to confirm the save, then `Enter` to accept the file name.
+6. Save the file by pressing <kbd>Ctrl + X</kbd> then press <kbd>y</kbd> then <kbd>Enter</kbd> to confirm the save, then <kbd>Enter</kbd> to accept the file name.
 
 You're now ready to run the script.
 
