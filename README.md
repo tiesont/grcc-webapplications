@@ -33,7 +33,7 @@ wget https://github.com/christopherpowers1/grcc-webapplications/raw/main/install
 ### METHOD 2: Use `nano` to Create the Script
 If you prefer, you can create the script using the built-in text editor in Linux called Nano. ([How to Use Nano (external)](https://linuxize.com/post/how-to-use-nano-text-editor/)) 
 
-1. On your Linux terminal screen, verify you are in the `ec2-user` home directory `~` and 
+1. On your Linux terminal screen, verify you are in the `ec2-user` home directory `~` by entering: 
 ```
 cd ~
 ```
@@ -60,7 +60,7 @@ You will also be prompted for the domain name you will be using for the class. B
 ### Actually Run the Script
 (If you aren't already, connect to your server using SSH or the AWS Connect function.)
 
-Verify you are in the `ec2-user` home directory `~`
+Verify you are in the `ec2-user` home directory `~`:
 ```
 cd ~
 ```
