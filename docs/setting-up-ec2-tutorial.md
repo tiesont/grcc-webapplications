@@ -2,7 +2,7 @@
 
 ## Get a (free or cheap\!) DNS Name For Your Web Apps
 
-If you plan to be a web developer, now may be a good time to buy a *yourname.com* domain or a cheap name from go-daddy or similar. If you already have one, feel free to use it, or a subdomain (*webapps.yourname.com*) if it's already in use.
+If you plan to be a web developer, now may be a good time to buy a *yourname.com* domain or a cheap name from Namecheap or similar. If you already have one, feel free to use it, or a subdomain (*webapps.yourname.com*) if it's already in use.
 
  A free (or low cost) domain can be found here (when they feel like giving you one\!):
 
