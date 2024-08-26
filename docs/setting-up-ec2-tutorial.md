@@ -338,13 +338,15 @@ Scroll to the end of the file (using your UP and DOWN arrow keys) and add the fo
 
 Copy and paste the following code:
 
-`<VirtualHost *:80>`  
-    `ServerName www.your_domain`  
-    `ServerAlias your_domain`  
-    `DocumentRoot /var/www/your_domain/html`  
-    `ErrorLog /var/www/your_domain/log/error.log`  
-    `CustomLog /var/www/your_domain/log/requests.log combined`  
-`</VirtualHost>`
+```
+<VirtualHost *:80>  
+    ServerName www.your_domain  
+    ServerAlias your_domain  
+    DocumentRoot /var/www/your_domain/html  
+    ErrorLog /var/www/your_domain/log/error.log  
+    CustomLog /var/www/your_domain/log/requests.log combined  
+</VirtualHost>
+```
 
 As usual, replace *your\_domain* with your domain name. **Save and exit.**
 
