@@ -121,33 +121,43 @@ You can connect to your server in many ways, but let's look at two of them, WinS
 WinSCP is an integrated FTP and SSH client. If you are on a college laptop or on-campus computer, WinSCP is already installed. If you need to download it, you can do so from their website [https://winscp.net/eng/downloads.php](https://winscp.net/eng/downloads.php) and install it as you normally would.
 
 When you open WinSCP, you will see a Login window. In the Host name field, enter your domain name. In the User name field, enter ec2-user and leave the password field blank. Then, click the Advanced drop-down menu.   
+
 ![](./images/setup.png)
 
 In the Advanced Site Settings window, use the navigation panel on the left and click on Authentication, located under SSH, as shown below. We need to create a .ppk file from the .pem file you saved earlier. Open the Tools drop-down menu and choose Generate New Key Pair with PuTTYgen.   
+
 ![](./images/advanced-settings.png)
 
 In the PuTTY Key Generator, click the Load button. Navigate to where your .pem file is located and open it.   
+
 ![](./images/putty-keygen1.png)
 
 The window will change to look like the image below. If you wish to secure your server further, enter a secure password in the Key passphrase field and again in the Confirm passphrase field. You will be prompted for this password each time you login. You may leave the field blank if you wish, but it will be less secure, and a warning will appear when you save the private key. To save the private key, click the Save private key button. Like your .pem file, save it somewhere secure where you can find it again. On a campus computer, you should save it to your J:/ drive in order to access it later.  
+
 ![](./images/putty-keygen2.png)
 
 Back in the Advanced Site Settings window, the Private key file field should be populated with your .ppk file. If it isn't, use the three dots menu to choose your .ppk file. It should look like the image below. Click OK to continue.  
+
 ![](./images/advanced-settings.png)
 
 Double check your settings below and click Save.  
+
 ![](./images/setup.png) 
 
 In the Save session as site dialog window, you can choose to change your Site name or leave it as default. Then, click OK to finish saving it.  
+
 ![](./images/savesession.png)
 
 Now, whenever you open WinSCP, your Login window should look like this. Choose Login to log onto your server. The first time you do, you may be prompted to confirm some settings. If you entered a password for your key file, you may need to enter it.   
+
 ![](./images/savesession-login.png.png)
 
 Once you clear any prompts, you are connected. You will now see the main window as shown below. The left side is your local computer, and the right side is your server. The location within your file system is shown in the blue bar above the file tree. It should look similar to FileZilla, which most of you are familiar with from your HTML classes. To connect to your server via SSH, you will need to click on the Open session in PuTTY button. 
+
 ![](./images/opensession.png)
 
 Again, the first time you do so, you may need to confirm some things in a series of dialog boxes. If you entered a password for your key file, you will need to enter it. If you see the terminal as shown below, you are connected and may skip to the *Set Up LAMP and phpMyAdmin* section.  
+
 ![](./images/putty-cli.png)
 
 ### Using Windows
