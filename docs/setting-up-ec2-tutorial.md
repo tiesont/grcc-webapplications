@@ -21,7 +21,7 @@ The content which follows contains commands which you will enter to install vari
 
 Under *Application and OS Images*, be sure to choose **Amazon Linux 2 AMI (HVM)**. Selecting a different AMI increases the difficulty of configuring the instance, as some of the options will not match the instructions given in the lecture.
 
-![AMI selection][./images/os-selection.png]
+![AMI selection](./images/os-selection.png)
 
 If you’re creating this instance as part of your AWS Academy training, you should have an existing SSH key, called *vockey.ppk*, which you can download from your AWS Academy portal. If not, you can create a new SSH key now, following the instructions below.
 
@@ -29,11 +29,11 @@ If you’re creating this instance as part of your AWS Academy training, you sho
 
 Under the *Key Pair (login)* section, click the *Create new key pair* button:
 
-![Key pair options][./images/key-pair.png]
+![Key pair options](./images/key-pair.png)
 
 In the dialog which opens, give your key a name:
 
-![Key pair dialog][./images/key-pair-dialog.png]
+![Key pair dialog](./images/key-pair-dialog.png)
 
 For this document, we named the file *grcc-rsa-keyfile.pem*. Click *Create key pair* and select an easy-to-find location for your file when prompted. We recommend saving it to the root of the folder where your course files are located.
 
@@ -68,17 +68,17 @@ The process for setting file permissions in the Linux and the macOS operating sy
 
 **Almost done\!** Under *Network Settings*, ensure that all three Firewall options are checked:
 
-![Network settings][./images/network-settings.png]
+![Network settings](./images/network-settings.png)
 
 This will allow the wizard to create the correct inbound rules to allow your EC2 instance to receive HTTP and HTTPS requests.
 
 Click the *Launch instance* button to initiate the creation of your EC2 instance\! Once the process completes, find and click on the instance identifier (*i-xxxxxxxxxxxxx*) in the success message:
 
-![Success dialog][./images/success-with-instance-link.png]
+![Success dialog](./images/success-with-instance-link.png)
 
 Clicking that link will take you to the overview of your new instance:
 
-![Instance dashboard][./images/instance-dashboard.png]
+![Instance dashboard](./images/instance-dashboard.png)
 
 **Next up:** allocating a “permanent” IP address to your instance using Elastic IP.
 
@@ -87,7 +87,7 @@ Clicking that link will take you to the overview of your new instance:
 #### Allocate an Elastic IP address
 
 1. On the left side of your browser window, look for the section labeled *Network & Security*, and then click on the *Elastic IPs* option:  
-   ![Network security menu][./images/network-security-menu.png]  
+   ![Network security menu](./images/network-security-menu.png)  
 1. In the upper right corner of the next page, click on *Allocate Elastic IP address*.   
 1. Leave all settings at their default and click the *Allocate* button. This will allocate an IP address to your account from the pool of available IP addresses.   
 1. Once the page has reloaded, check the box for your new IP address, then find and click the *Actions* button in the upper right corner of your browser.   
@@ -241,7 +241,7 @@ Run the following commands (each line is a separate command \- run them one at a
 
 The last command should print “enabled” \- your Apache module is now running\! Open your browser and type your domain into the navigation bar, then hit Enter. Your domain should load the Apache test page:
 
-![Apache test page][./images/apache-test-page.png]
+![Apache test page](./images/apache-test-page.png)
 
 **Congratulations\!** You now have a working web server\! We’re not quite done yet \- we need to update permissions on some files, and make sure that files which you will upload later have the correct permissions automatically.
 
@@ -290,15 +290,16 @@ This will create the directories to which you’ll upload your homework files, l
 `sudo nano /var/www/your_domain/html/index.html`
 
 Copy and paste the following markup:
-
-`<html>`  
-  `<head>`  
-	`<title>Welcome to your website!</title>`  
-  `</head>`  
-  `<body>`  
-	`<h1>Success! The your_domain virtual host is working!</h1>`  
-  `</body>`  
-`</html>`
+```
+<html>  
+  <head>  
+	  <title>Welcome to your website!</title>  
+  </head>  
+  <body> 
+	  <h1>Success! The your_domain virtual host is working!</h1> 
+  </body>  
+</html>
+```
 
 Again, replace your\_domain with your domain name. Save and exit[^3].
 
@@ -420,7 +421,7 @@ In your web browser, open the phpMyAdmin UI by visiting:
 `https://your_domain/phpMyAdmin`
 
 Replace *your\_domain* with your domain name. You should now see the phpMyAdmin login screen:  
-![phpMyAdmin login screen][./images/phpMyAdmin.png]
+![phpMyAdmin login screen](./images/phpMyAdmin.png)
 
 Login using “root” as the username and using the MariaDB password which you created above. You should now be logged in\! **Great job\!**
 
