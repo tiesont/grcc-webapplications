@@ -21,7 +21,7 @@ The content which follows contains commands which you will enter to install vari
 
 Under *Application and OS Images*, be sure to choose **Amazon Linux 2 AMI (HVM)**. Selecting a different AMI increases the difficulty of configuring the instance, as some of the options will not match the instructions given in the lecture.
 
-![AMI selection][./images/os-selection.png]
+![AMI selection][../docs/images/os-selection.png]
 
 If you’re creating this instance as part of your AWS Academy training, you should have an existing SSH key, called *vockey.ppk*, which you can download from your AWS Academy portal. If not, you can create a new SSH key now, following the instructions below.
 
