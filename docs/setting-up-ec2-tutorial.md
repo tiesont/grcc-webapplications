@@ -301,6 +301,7 @@ This will create the directories to which you'll upload your homework files, lat
 `sudo nano /var/www/your_domain/html/index.html`
 
 Copy and paste the following markup:
+
 ```
 <html>  
   <head>  
@@ -442,7 +443,17 @@ Login using “root” as the username and using the MariaDB password which you 
 
 ## Upload Code\!
 
-—
+### Using WinSCP
+
+---
+
+### Using FileZilla
+
+---
+
+### Using Cyberduck
+
+---
 
 ## Take a Snapshot\! (Optional)
 
