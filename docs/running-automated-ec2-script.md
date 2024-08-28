@@ -32,6 +32,7 @@ If you are using WinSCP, you can [download `install-lamp-secure.sh` from this re
 By default, when you SSH into your server as `ec2-user`, you will be at the `ec2-user` home directory, which will be noted with a tilde (~).
 
 Download `install-lamp-secure.sh` from this repository using the following command:
+
 ```
 wget https://github.com/christopherpowers1/grcc-webapplications/raw/main/install-lamp-secure.sh
 ```
@@ -84,5 +85,3 @@ If your script doesn't run, you may need to make it executable:
 ```
 chmod +x install-lamp-secure.sh
 ```
-
-
