@@ -392,12 +392,12 @@ Run the following commands (each line is a separate command \- run them one at a
 The second command initiates a wizard which walks you through setting up the root DB user. When prompted:
 
 1. Press Enter  
-1. Enter 'n'  
-1. Enter 'y' to change the root password. Create a memorable password, or use a service such as Norton Password Generator ([https://identitysafe.norton.com/password-generator/](https://identitysafe.norton.com/password-generator/))  
-1. Enter 'y' to remove anonymous user accounts  
-1. Enter 'y' to disable remote root login  
-1. Enter 'y' to remove the test database  
-1. Enter 'y' to reload and apply your changes.  
+1. Enter `n`  
+1. Enter `y` to change the root password. Create a memorable password, or use a service such as Norton Password Generator ([https://identitysafe.norton.com/password-generator/](https://identitysafe.norton.com/password-generator/))  
+1. Enter `y` to remove anonymous user accounts  
+1. Enter `y` to disable remote root login  
+1. Enter `y` to remove the test database  
+1. Enter `y` to reload and apply your changes.  
    
 
 **That's it\! MariaDB is now secure.** We won't be using it right away, so run the following command to shut it down:
@@ -445,15 +445,39 @@ Login using “root” as the username and using the MariaDB password which you 
 
 ### Using WinSCP
 
----
+If you used WinSCP to configure your EC2 instance, then you already have an SFTP client. Otherwise, see [Using WinSCP](#using-winscp) above.
 
 ### Using FileZilla
 
----
+FileZilla ([https://filezilla-project.org/](https://filezilla-project.org/)) is a popular SFTP client and is available for most operating systems. Follow the steps below to connect to your EC2 instance using FileZilla:
+
+1. From the menu bar, select **File**, then **Site Manager...**
+2. Click the **New site** button, located in the bottom left of the dialog.
+3. Enter a meaningful name for this site entry where prompted (the site name should be in edit mode in the _My Sites_ list).
+4. On the right side of the dialog, click the **Protocol:** dropdown and select _SFTP - SSH File Transfer Protocol_.
+5. In the **Host:** textbox, enter your domain or the public IP address for your instance - either is acceptable.
+6. In the **Port:** textbox, enter the value `22` - this is the port normally used for SFTP connections.
+6. Click the **Logon Type:** dropdown and select _Key file_.
+7. In the **User:** textbox, enter `ec2-user` (the same user with which you connected to the instance before).
+8. Click the **Browse...** button to the right of the **Key file:** textbox. Navigate to and select the .pem file which you previously used to connect to your EC2 instance.
+9. Click the **Connect** button at the bottom of the dialog. **Done!**
+
+Assuming everything was entered properly, FileZilla will connect to your EC2 instance. You'll see the right side of the application (the _Remote site_ panes) reload to display the current contents of your instance. At this point, you can use FileZilla to navigate to the site root which you previously set up in the VirtualHost config - all of your HTML/CSS/JavaScript files will be uploaded to the site root, as directed in each assignment.
 
 ### Using Cyberduck
 
----
+Cyberduck ([https://cyberduck.io/](https://cyberduck.io/)) is another free SFTP client and is available for most operating systems. Follow the steps below to connect to your EC2 instance using Cyberduck:
+
+1. In the main toolbar, click **Open Connection**. A dialog will open.
+2. In the dialog, click the first dropdown and select _SFTP (SSH File Transfer Protocol)_.
+3. In the **Server:** textbox, enter your domain or the public IP address for your instance - either is acceptable.
+4. In the **Port:** textbox, enter the value `22` - this is the port normally used for SFTP connections.
+5. In the **Username:** textbox, enter `ec2-user` (the same user with which you connected to the instance before).
+6. Leave the **Password:** textbox blank.
+7. Click the dropdown next to **SSH Private Key:**. Navigate to and select the .pem file which you previously used to connect to your EC2 instance.
+8. Click the **Connect** button. **Done!**
+
+Assuming everything was entered properly, Cyberduck will connect to your EC2 instance. You'll see the application reload to display the current contents of your instance. At this point, you can use Cyberduck to navigate to the site root which you previously set up in the VirtualHost config - all of your HTML/CSS/JavaScript files will be uploaded to the site root, as directed in each assignment.
 
 ## Take a Snapshot\! (Optional)
 
