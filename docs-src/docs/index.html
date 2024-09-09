@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="GRCC,TLC,ruby,python,CIS" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png" />
+    <link rel="manifest" href="./site.webmanifest" />
+    
+    <title> &mdash; GRCC Tutorial &amp; Learning Center</title>
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Bree+Serif&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="./assets/css/prism.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+
+    
+</head>
+<body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 navbar-expand-sm">
+    <a class="navbar-brand pl-3" href="./index.html">FluentData</a>
+    <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="navbar-nav">
+            <li class="nav-item active text-nowrap">
+                <a class="nav-link" href="./index.html">Docs</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="./fluency.html">Fluency Extension</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+    
+    <div class="container-fluid">   
+        <nav class="d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <a href="#GettingStarted">Getting started</a>
+        </h6>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#Requirements">Requirements</a></li>
+            <li class="nav-item"><a class="nav-link" href="#SupportedDatabases">Supported databases</a></li>
+            <li class="nav-item"><a class="nav-link" href="#Installation">Installation</a></li>
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <a href="#CoreConcepts">Core concepts</a>
+        </h6>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#DbContext">DbContext</a></li>
+            <li class="nav-item"><a class="nav-link" href="#DbCommand">DbCommand</a></li>
+            <li class="nav-item"><a class="nav-link" href="#Events">Events</a></li>
+            <li class="nav-item"><a class="nav-link" href="#Builders">Builders</a></li>
+            <li class="nav-item"><a class="nav-link" href="#Mapping">Mapping</a></li>
+            <li class="nav-item"><a class="nav-link" href="#Dispose">When should you dispose&#63;</a></li>
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <a href="#CodeSamples">Code samples</a>
+        </h6>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#InitDbContext">Create and initialize a DbContext</a></li>
+            <li class="nav-item"><a class="nav-link" href="#Query">Query for a list of items</a></li>
+            <li class="nav-item"><a class="nav-link" href="#QuerySingle">Query for a single item</a></li>
+            <li class="nav-item"><a class="nav-link" href="#QueryValue">Query for a scalar value</a></li>
+            <li class="nav-item"><a class="nav-link" href="#QueryValues">Query for a list of scalar values</a></li>
+            <li class="nav-item"><a class="nav-link" href="#Parameters">Parameters</a></li>
+            <li class="nav-item"><a class="nav-link" href="#CodeSamplesMapping">Mapping</a></li>
+            <li class="nav-item"><a class="nav-link" href="#MultiResultSets">Multiple result sets</a></li>
+            <li class="nav-item"><a class="nav-link" href="#SelectData">Select data &#38; Paging</a></li>
+            <li class="nav-item"><a class="nav-link" href="#InsertData">Insert data</a></li>
+            <li class="nav-item"><a class="nav-link" href="#UpdateData">Update data</a></li>
+            <li class="nav-item"><a class="nav-link" href="#DeleteData">Delete data</a></li>
+            <li class="nav-item"><a class="nav-link" href="#StoredProcedures">Stored procedures</a></li>
+            <li class="nav-item"><a class="nav-link" href="#Transactions">Transactions</a></li>
+            <li class="nav-item"><a class="nav-link" href="#EntityFactory">Entity factory</a></li>
+        </ul>
+    </div>
+</nav>
+
+        <main role="main" class="main-content px-4" markdown="1">   
+            <h1 id="setting-up-an-aws-ec2-lamp-server">Setting Up an AWS EC2 LAMP Server</h1>
+
+<h2 id="get-a-free-or-cheap-dns-name-for-your-web-apps">Get a (free or cheap!) DNS Name For Your Web Apps</h2>
+
+<p>If you plan to be a web developer, now may be a good time to buy a <em>yourname.com</em> domain or a cheap name from Namecheap or similar. If you already have one, feel free to use it, or a subdomain (<em>webapps.yourname.com</em>) if it’s already in use.</p>
+
+<p>A free (or low cost) domain can be found here (when they feel like giving you one!):</p>
+
+<ul>
+  <li>https://education.github.com/pack</li>
+  <li>https://www.getfreedomain.name/</li>
+  <li>http://www.dot.tk/en/index.html?lang=en</li>
+  <li>https://www.namecheap.com/</li>
+</ul>
+
+<h2 id="a-quick-note">A Quick Note</h2>
+
+<p>The content which follows contains commands which you will enter to install various programs on your PC or on your EC2 instance. <strong>Unless otherwise stated, each command will be entered on a single line.</strong></p>
+
+<h2 id="launch-and-configure-an-ec2-instance">Launch and Configure an EC2 Instance</h2>
+
+<h3 id="launch-an-ec2-instance">Launch an EC2 Instance</h3>
+
+<p>Under <em>Application and OS Images</em>, be sure to choose <strong>Amazon Linux 2 AMI (HVM)</strong>. Selecting a different AMI increases the difficulty of configuring the instance, as some of the options will not match the instructions given in the lecture.</p>
+
+<p><img src="./assets/images/os-selection.png" alt="AMI selection" /></p>
+
+<p>If you’re creating this instance as part of your AWS Academy training, you should have an existing SSH key, called <em>vockey.ppk</em>, which you can download from your AWS Academy portal. If not, you can create a new SSH key now, following the instructions below.</p>
+
+<h3 id="creating-a-key-pair-optional">Creating a Key Pair (Optional)</h3>
+
+<p>Under the <em>Key Pair (login)</em> section, click the <em>Create new key pair</em> button:</p>
+
+<p><img src="./assets/images/key-pair.png" alt="Key pair options" /></p>
+
+<p>In the dialog which opens, give your key a name:</p>
+
+<p><img src="./assets/images/key-pair-dialog.png" alt="Key pair dialog" /></p>
+
+<p>For this document, we named the file <em>grcc-rsa-keyfile.pem</em>. Click <em>Create key pair</em> and select an easy-to-find location for your file when prompted. We recommend saving it to the root of the folder where your course files are located.</p>
+
+<h3 id="set-key-file-permissions">Set Key File Permissions</h3>
+
+<p>To use your key file in an SSH connection, you’ll need to make sure that the file’s security permissions are such that only your current user has access.</p>
+
+<h4 id="linux-and-macos">Linux and macOS</h4>
+
+<p>The process for setting file permissions in the Linux and the macOS operating systems are the same. First, open the terminal application. Then, enter the following command (replacing <em>key-pair-name.pem</em> with the full path to your key file):</p>
+
+<p><code>chmod 400 key-pair-name.pem</code></p>
+
+<p><strong>That’s it!</strong> Continue to <em>Completing Set Up</em>.</p>
+
+<h4 id="windows">Windows</h4>
+
+<ol>
+  <li>Locate the key file in Windows Explorer.</li>
+  <li>Right-click on the file, then select the <strong><em>Properties</em></strong> option.</li>
+  <li>In the dialog which opens, click the <strong><em>Security</em></strong> tab and click the <strong>Advanced</strong> button.</li>
+  <li>Click the <strong>Disable inheritance</strong> button.</li>
+  <li>Remove access to all users except for the current user:
+    <ol>
+      <li>Click on a user to remove.</li>
+      <li>Click the <strong>Remove</strong> button.</li>
+      <li>Repeat until only your current user remains in the list.</li>
+    </ol>
+  </li>
+  <li>Click <strong>OK</strong> to close the <em>Advanced Security Settings</em> window.</li>
+  <li>Click <strong>OK</strong> to close the <em>Properties</em> window.</li>
+</ol>
+
+<p><strong>All done!</strong> Continue to <em>Completing Set Up</em>.</p>
+
+<h3 id="completing-set-up">Completing Set Up</h3>
+
+<p><strong>Almost done!</strong> Under <em>Network Settings</em>, ensure that all three Firewall options are checked:</p>
+
+<p><img src="./assets/images/network-settings.png" alt="Network settings" /></p>
+
+<p>This will allow the wizard to create the correct inbound rules to allow your EC2 instance to receive HTTP and HTTPS requests.</p>
+
+<p>Click the <em>Launch instance</em> button to initiate the creation of your EC2 instance! Once the process completes, find and click on the instance identifier (<em>i-xxxxxxxxxxxxx</em>) in the success message:</p>
+
+<p><img src="./assets/images/success-with-instance-link.png" alt="Success dialog" /></p>
+
+<p>Clicking that link will take you to the overview of your new instance:</p>
+
+<p><img src="./assets/images/instance-dashboard.png" alt="Instance dashboard" /></p>
+
+<p><strong>Next up:</strong> allocating a “permanent” IP address to your instance using Elastic IP.</p>
+
+<h3 id="allocate-an-elastic-ip-address-and-associate-it-with-your-ec2-instance">Allocate an Elastic IP address and associate it with your EC2 instance.</h3>
+
+<h4 id="allocate-an-elastic-ip-address">Allocate an Elastic IP address</h4>
+
+<ol>
+  <li>On the left side of your browser window, look for the section labeled <em>Network &amp; Security</em>, and then click on the <em>Elastic IPs</em> option:<br />
+<img src="./assets/images/network-security-menu.png" alt="Network security menu" /></li>
+  <li>In the upper right corner of the next page, click on <em>Allocate Elastic IP address</em>.</li>
+  <li>Leave all settings at their default and click the <em>Allocate</em> button. This will allocate an IP address to your account from the pool of available IP addresses.</li>
+  <li>Once the page has reloaded, check the box for your new IP address, then find and click the <em>Actions</em> button in the upper right corner of your browser.</li>
+  <li>Click <em>Associate Elastic IP address</em>.</li>
+  <li>In the page which loads, leave the <em>Resource</em> type as <em>Instance</em>.</li>
+  <li>For the <em>Instance</em> field, click in the textbox labeled <em>Choose an instance</em>, which will load all of your current EC2 instances (you should have only one instance at this time).</li>
+  <li>Choose your running instance, then click the <em>Associate</em> button.</li>
+  <li>Your instance now has a “permanent” public IP address - we’ll use this from now on.</li>
+</ol>
+
+<h4 id="point-your-domain-at-your-ec2-instance">Point Your Domain at Your EC2 Instance</h4>
+
+<p>In your domain manager, create an A record using your public (Elastic IP) address. It’s recommended to also create a CNAME record - this allows you to point both <a href="http://yourdomain">http://yourdomain</a> and <a href="http://www.yourdomain">http://www.yourdomain</a> at your EC2 instance. For this document, we added the following records:</p>
+
+<ul>
+  <li><strong>A Record</strong>
+    <ul>
+      <li><strong>Host:</strong> @</li>
+      <li><strong>IP address:</strong> (your public Elastic IP address)</li>
+    </ul>
+  </li>
+  <li><strong>CNAME record</strong>
+    <ul>
+      <li><strong>Host:</strong> www</li>
+      <li><strong>Target:</strong> yourdomain.tld (replace with the domain you’ve registered)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Your settings will vary based on the domain registrar where you acquired the domain.</p>
+
+<h2 id="connecting-to-your-new-server">Connecting to Your New Server</h2>
+
+<p>You can connect to your server in many ways, but let’s look at two of them, WinSCP and the terminal. As the name suggests, WinSCP is only on Windows, but there are comparable programs available for Mac. How you connect is up to you, based on your personal preferences.</p>
+
+<h3 id="using-winscp">Using WinSCP</h3>
+
+<p>WinSCP is an integrated FTP and SSH client. If you are on a college laptop or on-campus computer, WinSCP is already installed. If you need to download it, you can do so from their website <a href="https://winscp.net/eng/downloads.php">https://winscp.net/eng/downloads.php</a> and install it as you normally would.</p>
+
+<p>When you open WinSCP, you will see a Login window. In the Host name field, enter your domain name. In the User name field, enter ec2-user and leave the password field blank. Then, click the Advanced drop-down menu.</p>
+
+<p><img src="./assets/images/setup.png" alt="" /></p>
+
+<p>In the Advanced Site Settings window, use the navigation panel on the left and click on Authentication, located under SSH, as shown below. We need to create a .ppk file from the .pem file you saved earlier. Open the Tools drop-down menu and choose Generate New Key Pair with PuTTYgen.</p>
+
+<p><img src="./assets/images/advanced-settings.png" alt="" /></p>
+
+<p>In the PuTTY Key Generator, click the Load button. Navigate to where your .pem file is located and open it.</p>
+
+<p><img src="./assets/images/putty-keygen1.png" alt="" /></p>
+
+<p>The window will change to look like the image below. If you wish to secure your server further, enter a secure password in the Key passphrase field and again in the Confirm passphrase field. You will be prompted for this password each time you login. You may leave the field blank if you wish, but it will be less secure, and a warning will appear when you save the private key. To save the private key, click the Save private key button. Like your .pem file, save it somewhere secure where you can find it again. On a campus computer, you should save it to your J:/ drive in order to access it later.</p>
+
+<p><img src="./assets/images/putty-keygen2.png" alt="" /></p>
+
+<p>Back in the Advanced Site Settings window, the Private key file field should be populated with your .ppk file. If it isn’t, use the three dots menu to choose your .ppk file. It should look like the image below. Click OK to continue.</p>
+
+<p><img src="./assets/images/advanced-settings.png" alt="" /></p>
+
+<p>Double check your settings below and click Save.</p>
+
+<p><img src="./assets/images/setup.png" alt="" /></p>
+
+<p>In the Save session as site dialog window, you can choose to change your Site name or leave it as default. Then, click OK to finish saving it.</p>
+
+<p><img src="./assets/images/savesession.png" alt="" /></p>
+
+<p>Now, whenever you open WinSCP, your Login window should look like this. Choose Login to log onto your server. The first time you do, you may be prompted to confirm some settings. If you entered a password for your key file, you may need to enter it.</p>
+
+<p><img src="./assets/images/savesession-login.png.png" alt="" /></p>
+
+<p>Once you clear any prompts, you are connected. You will now see the main window as shown below. The left side is your local computer, and the right side is your server. The location within your file system is shown in the blue bar above the file tree. It should look similar to FileZilla, which most of you are familiar with from your HTML classes. To connect to your server via SSH, you will need to click on the Open session in PuTTY button.</p>
+
+<p><img src="./assets/images/opensession.png" alt="" /></p>
+
+<p>Again, the first time you do so, you may need to confirm some things in a series of dialog boxes. If you entered a password for your key file, you will need to enter it. If you see the terminal as shown below, you are connected and may skip to the <em>Set Up LAMP and phpMyAdmin</em> section.</p>
+
+<p><img src="./assets/images/putty-cli.png" alt="" /></p>
+
+<h3 id="using-windows">Using Windows</h3>
+
+<p>If you’re using Windows 11, then you already have everything you need to connect to your EC2 instance - click the <strong>Start</strong> button, and then type <em>Terminal</em>. Open the Terminal application, and then you’re ready to skip ahead to <em>Connect Using SSH</em>.</p>
+
+<p>If you’re using Windows 10 or older, then you have a few options:</p>
+
+<ul>
+  <li>Command line</li>
+  <li>PowerShell</li>
+  <li>Terminal</li>
+</ul>
+
+<p>The command line and PowerShell are already installed on your computer. Terminal is an optional software application which you can install from the Microsoft Store - follow this link learn how to install the Terminal application:</p>
+
+<p><a href="https://learn.microsoft.com/en-us/windows/terminal/install">https://learn.microsoft.com/en-us/windows/terminal/install</a></p>
+
+<p>Once your terminal is running, you’ll need to verify if the ssh command is available. In the terminal, type:</p>
+
+<p><code>ssh</code></p>
+
+<p>If you see a “usage” list, then you can proceed to <em>Set Up LAMP and phpMyAdmin</em>. If you see an error message, you’ll need to install OpenSSH. To install OpenSSH, type (or copy and paste) the following command into the PowerShell terminal<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>:</p>
+
+<p><code>Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0</code></p>
+
+<p>You’ll see a brief “status bar” message as the tool installs. Once the tool has finished installing you are ready to connect to your EC2 instance!</p>
+
+<h3 id="using-osxmacos">Using OSX/macOS</h3>
+
+<p>To connect to your EC2 instance from an Apple computer, you’ll use the Terminal application, found in your <em>Applications</em> list. An SSH client should already be installed - you can verify this by launching Terminal and then typing in the following command:</p>
+
+<p><code>ssh</code></p>
+
+<p>You should see a help list of arguments for the ssh command.</p>
+
+<h3 id="using-linux">Using Linux</h3>
+
+<p>To connect to your EC2 instance from a Linux computer, you’ll use the terminal (or <em>shell</em>) application, typically found in your <em>Administration</em> software list - the location will vary depending on your Linux distribution and the desktop manager which was installed during setup (consult the documentation for your Linux distribution for more details). An SSH client should already be installed - you can verify this by launching the terminal (press the <code>Ctrl</code>+<code>Alt</code>+<code>t</code> keys to open the terminal) and then typing in the following command:</p>
+
+<p><code>ssh</code></p>
+
+<p>You should see a help list of arguments for the ssh command.</p>
+
+<h2 id="connect-using-ssh">Connect using SSH</h2>
+
+<p>Regardless of the operating system from which you’re connecting, the commands which follow will be the same. Within your chosen terminal application, type the following command, replacing <em>[/path/key-pair-name.pem]</em> with the path to the PEM file you created above and replacing <em>[elastic IP address]</em> with your site’s public IP address:</p>
+
+<p><code>ssh -i [/path/key-pair-name.pem] ec2-user@[elastic IP address]</code></p>
+
+<p><strong>You’re now connected!</strong> When you’re ready, continue to the next step, <em>Set Up LAMP and phpMyAdmin</em>.</p>
+
+<h2 id="set-up-lamp-and-phpmyadmin">Set Up LAMP and phpMyAdmin</h2>
+
+<p>For this next step, we’ll be following the process outlined by the article <em>Tutorial: Install a LAMP server on AL2</em>,  located at</p>
+
+<p><a href="https://docs.aws.amazon.com/linux/al2/ug/ec2-lamp-amazon-linux-2.html">https://docs.aws.amazon.com/linux/al2/ug/ec2-lamp-amazon-linux-2.html</a></p>
+
+<p>We’re including the relevant commands here, but for brevity, we’re omitting the majority of the tutorial’s content. Please take the time to read the source article.</p>
+
+<h3 id="connect">Connect</h3>
+
+<p>If not already connected, connect to your EC2 instance (substituting your values):</p>
+
+<p><code>ssh -i [/path/key-pair-name.pem] ec2-user@[elastic IP address]</code></p>
+
+<h3 id="install-web-server-software">Install Web Server Software</h3>
+
+<p>Run the following commands (each line is a separate command - run them one at a time):</p>
+
+<p><code>sudo yum update -y</code></p>
+
+<p><code>sudo amazon-linux-extras install mariadb10.5</code></p>
+
+<p><code>sudo amazon-linux-extras install php8.2</code></p>
+
+<p><code>sudo yum install -y httpd</code></p>
+
+<p>When prompted, enter ‘y’ to allow the installation of each module.</p>
+
+<p>At this point, you’ve installed MariaDB (a relational database software), PHP (for creating dynamic websites - you’ll use this in CIS-247), and Apache - the web server software that allows your EC2 instance to respond to requests from your browser. <strong>Good job!</strong></p>
+
+<h3 id="start--configure-apache">Start &amp; Configure Apache</h3>
+
+<p>We’ve installed the software we need in order for your EC2 instance to act as a web server, but we need to <em>start</em> the software and make sure it starts automatically anytime the instance is started or rebooted.</p>
+
+<p>Run the following commands (each line is a separate command - run them one at a time):</p>
+
+<p><code>sudo systemctl start httpd</code></p>
+
+<p><code>sudo systemctl enable httpd</code></p>
+
+<p><code>sudo systemctl is-enabled httpd</code></p>
+
+<p>The last command should print “enabled” - your Apache module is now running! Open your browser and type your domain into the navigation bar, then hit Enter. Your domain should load the Apache test page:</p>
+
+<p><img src="./assets/images/apache-test-page.png" alt="Apache test page" /></p>
+
+<p><strong>Congratulations!</strong> You now have a working web server! We’re not quite done yet - we need to update permissions on some files, and make sure that files which you will upload later have the correct permissions automatically.</p>
+
+<h3 id="set-file-permissions">Set File Permissions</h3>
+
+<p>Run the following commands (each line is a separate command - run them one at a time):</p>
+
+<p><code>sudo usermod -a -G apache ec2-user</code></p>
+
+<p><code>exit</code></p>
+
+<p>That last command, <em>exit</em>, will end your SSH session - reconnect, and then continue with:</p>
+
+<p><code>sudo chown -R ec2-user:apache /var/www</code></p>
+
+<p><code>find /var/www -type f -exec sudo chmod 0664 {} \;</code></p>
+
+<p>At this point, you’ve done the minimum to allow your web server to serve your web pages as you upload them. The next step is to configure your web server to use HTTPS (a secure version of HTTP), taking advantage of the free certificate service Let’s Encrypt.</p>
+
+<h2 id="encrypt-the-connection-with-certificate-automation-lets-encrypt-with-certbot-on-amazon-linux-2">Encrypt the Connection with Certificate Automation: Let’s Encrypt with Certbot on Amazon Linux 2</h2>
+
+<p>Let’s Encrypt is a service which provides free SSL/TLS certificates, making it relatively easy to enable HTTPS on your web server. If you’d like to learn more, visit <a href="https://letsencrypt.org/about/">https://letsencrypt.org/about/</a>.</p>
+
+<p>As in previous steps, we’ll skip most of the explanation around the commands you’ll need to execute.</p>
+
+<h4 id="add-certbot">Add Certbot</h4>
+
+<p>Run the following commands (each line is a separate command - run them one at a time):</p>
+
+<p><code>sudo amazon-linux-extras install epel</code></p>
+
+<p><code>sudo yum install certbot-apache</code></p>
+
+<p>When prompted, enter ‘y’ to allow the installation of each module. <strong>Before we can run Certbot, we need to set up our virtual host configuration.</strong></p>
+
+<h4 id="setup-virtual-host">Setup Virtual Host</h4>
+
+<p>Run the following commands, substituting the domain which you registered for <em>your_domain</em> (each line is a separate command - run them one at a time):</p>
+
+<p><code>sudo mkdir -p /var/www/your_domain/html</code></p>
+
+<p><code>sudo mkdir -p /var/www/your_domain/log</code></p>
+
+<p>This will create the directories to which you’ll upload your homework files, later. To verify that our virtual host is working, we’ll create a simple test page, using <strong>nano<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup></strong>:</p>
+
+<p><code>sudo nano /var/www/your_domain/html/index.html</code></p>
+
+<p>Copy and paste the following markup:</p>
+
+<pre><code class="language-language-html">&lt;html&gt;  
+  &lt;head&gt;  
+	  &lt;title&gt;Welcome to your website!&lt;/title&gt;  
+  &lt;/head&gt;  
+  &lt;body&gt; 
+	  &lt;h1&gt;Success! The your_domain virtual host is working!&lt;/h1&gt; 
+  &lt;/body&gt;  
+&lt;/html&gt;
+</code></pre>
+
+<p>Again, replace your_domain with your domain name. Save and exit<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote" rel="footnote">3</a></sup>.</p>
+
+<p>Next, we’ll create directories for storing our virtual host configuration files. Enter the following command:</p>
+
+<p><code>sudo mkdir /etc/httpd/sites-available</code></p>
+
+<p>This creates a directory for storing virtual hosts we <em>could</em> use. Next, enter the following command:</p>
+
+<p><code>sudo mkdir /etc/httpd/sites-enabled</code></p>
+
+<p>This directory stores the configuration file for <strong>enabled</strong> virtual hosts; that is, the <em>active</em> virtual hosts.</p>
+
+<p>Next, we need to update the Apache configuration file to tell it to look for our virtual host configurations. We’ll use nano to update the file:</p>
+
+<p><code>sudo nano /etc/httpd/conf/httpd.conf</code></p>
+
+<p>Scroll to the end of the file (using your UP and DOWN arrow keys) and add the following line:</p>
+
+<p><code>IncludeOptional sites-enabled/*.conf</code></p>
+
+<p><strong>Save and exit.</strong> From now on, any configuration files found in the <em>sites-enabled</em> directory will be loaded when Apache starts. Let’s add a configuration file for our domain (remember to replace <em>your_domain</em> with your domain name):</p>
+
+<p><code>sudo nano /etc/httpd/sites-available/your_domain.conf</code></p>
+
+<p>Copy and paste the following code:</p>
+
+<pre><code class="language-language-apacheconf">&lt;VirtualHost *:80&gt;  
+    ServerName www.your_domain  
+    ServerAlias your_domain  
+    DocumentRoot /var/www/your_domain/html  
+    ErrorLog /var/www/your_domain/log/error.log  
+    CustomLog /var/www/your_domain/log/requests.log combined  
+&lt;/VirtualHost&gt;
+</code></pre>
+
+<p>As usual, replace <em>your_domain</em> with your domain name. <strong>Save and exit.</strong></p>
+
+<p>To complete the virtual host setup, run the following command (replacing <em>your_domain</em> with your domain name):</p>
+
+<p><code>sudo ln -s /etc/httpd/sites-available/your_domain.conf /etc/httpd/sites-enabled/your_domain.conf</code></p>
+
+<p>This creates a symlink, or <em>symbolic link</em>, for your configuration file. To put simply, your file isn’t actually copied to <em>sites-ena</em>bled, but it <em>appears</em> to have been copied. This allows Apache to load your virtual configuration without needing to have duplicate versions of the same configuration values.</p>
+
+<p><strong>One last step</strong> - restart Apache using the following command:</p>
+
+<p><code>sudo systemctl restart httpd</code></p>
+
+<p>Reload your website in your browser, and you should now see the basic HTML page we created above.</p>
+
+<h2 id="complete-certbot-setup">Complete Certbot Setup</h2>
+
+<p>Now that you have a functioning virtual host, we can run Certbot. <strong>It’s actually pretty simple.</strong></p>
+
+<p>First, make sure that your domain works - load your website in your browser. If you can visit <em>http://your_domain</em> (replacing <em>your_domain</em> with your registered domain name), then you can proceed. If not, wait about 15 minutes and then try again. Once you can successfully load your domain, continue with the steps below.</p>
+
+<p>Run the following command, replacing <em>your_domain</em> with your domain name:</p>
+
+<p><code>sudo certbot --apache -d your_domain</code></p>
+
+<p>You’ll need to enter a <strong>valid</strong> email address in the first prompt (use either your GRCC student email address or a personal email address - it’s up to you). You <strong>must</strong> accept the second prompt (<em>Terms of Service</em>) to continue. The third prompt is optional - accept if you’d like your email address added to the Electronic Frontier Foundation’s mailing list.</p>
+
+<p>Wait a moment or two, and assuming you followed the instructions above correctly, Certbot will complete successfully. <strong>Congrats</strong>! Reload your website to see that you now have a working HTTPS connection!</p>
+
+<h2 id="secure-the-database-server-and-install-phpmyadmin">Secure the Database Server and Install phpMyAdmin</h2>
+
+<p>With the hard part out of the way, we can complete a few housekeeping tasks. We need to change some of the default MariaDB settings (to prevent unauthorized users from accessing our databases) and we’ll install phpMyAdmin to give us a graphical user interface (GUI) for managing MariaDB.</p>
+
+<h3 id="secure-the-database">Secure the Database</h3>
+
+<p>Run the following commands (each line is a separate command - run them one at a time):</p>
+
+<p><code>sudo systemctl start mariadb</code></p>
+
+<p><code>sudo mysql_secure_installation</code></p>
+
+<p>The second command initiates a wizard which walks you through setting up the root DB user. When prompted:</p>
+
+<ol>
+  <li>Press Enter</li>
+  <li>Enter <code>n</code></li>
+  <li>Enter <code>y</code> to change the root password. Create a memorable password, or use a service such as Norton Password Generator (<a href="https://identitysafe.norton.com/password-generator/">https://identitysafe.norton.com/password-generator/</a>)</li>
+  <li>Enter <code>y</code> to remove anonymous user accounts</li>
+  <li>Enter <code>y</code> to disable remote root login</li>
+  <li>Enter <code>y</code> to remove the test database</li>
+  <li>Enter <code>y</code> to reload and apply your changes.</li>
+</ol>
+
+<p><strong>That’s it! MariaDB is now secure.</strong> We won’t be using it right away, so run the following command to shut it down:</p>
+
+<p><code>sudo systemctl stop mariadb</code></p>
+
+<p>You can skip the preceding command if you’d like to experiment with MariaDB later. If you want Maria to always start when the EC2 instance starts, run the following command:</p>
+
+<p><code>sudo systemctl enable mariadb</code></p>
+
+<h3 id="install-phpmyadmin">Install phpMyAdmin</h3>
+
+<p>With MariaDB installed and configured, our last task is to install phpMyAdmin. Run the following commands, replacing <em>your_domain</em> with your domain name:</p>
+
+<p><code>sudo yum install php-mbstring php-xml -y</code></p>
+
+<p><code>sudo systemctl restart httpd</code></p>
+
+<p><code>sudo systemctl restart php-fpm</code></p>
+
+<p><code>cd /var/www/your_domain/html</code></p>
+
+<p><code>wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz</code></p>
+
+<p><code>mkdir phpMyAdmin &amp;&amp; tar -xvzf phpMyAdmin-latest-all-languages.tar.gz -C phpMyAdmin --strip-components 1</code></p>
+
+<p><code>rm phpMyAdmin-latest-all-languages.tar.gz</code></p>
+
+<p>If you previously shutdown MariaDB, start it now:</p>
+
+<p><code>sudo systemctl start mariadb</code></p>
+
+<p>In your web browser, open the phpMyAdmin UI by visiting:</p>
+
+<p><code>https://your_domain/phpMyAdmin</code></p>
+
+<p>Replace <em>your_domain</em> with your domain name. You should now see the phpMyAdmin login screen:<br />
+<img src="./assets/images/phpMyAdmin.png" alt="phpMyAdmin login screen" /></p>
+
+<p>Login using “root” as the username and using the MariaDB password which you created above. You should now be logged in! <strong>Great job!</strong></p>
+
+<p><strong>That’s it!</strong> There are a few additional steps left to configure phpMyAdmin, which you’ll do in CIS-247. For now, you’re ready to upload your static files!</p>
+
+<h2 id="upload-code">Upload Code!</h2>
+
+<h3 id="using-winscp-1">Using WinSCP</h3>
+
+<p>If you used WinSCP to configure your EC2 instance, then you already have an SFTP client. Otherwise, see <a href="#using-winscp">Using WinSCP</a> above.</p>
+
+<h3 id="using-filezilla">Using FileZilla</h3>
+
+<p>FileZilla (<a href="https://filezilla-project.org/">https://filezilla-project.org/</a>) is a popular SFTP client and is available for most operating systems. Follow the steps below to connect to your EC2 instance using FileZilla:</p>
+
+<ol>
+  <li>From the menu bar, select <strong>File</strong>, then <strong>Site Manager…</strong></li>
+  <li>Click the <strong>New site</strong> button, located in the bottom left of the dialog.</li>
+  <li>Enter a meaningful name for this site entry where prompted (the site name should be in edit mode in the <em>My Sites</em> list).</li>
+  <li>On the right side of the dialog, click the <strong>Protocol:</strong> dropdown and select <em>SFTP - SSH File Transfer Protocol</em>.</li>
+  <li>In the <strong>Host:</strong> textbox, enter your domain or the public IP address for your instance - either is acceptable.</li>
+  <li>In the <strong>Port:</strong> textbox, enter the value <code>22</code> - this is the port normally used for SFTP connections.</li>
+  <li>Click the <strong>Logon Type:</strong> dropdown and select <em>Key file</em>.</li>
+  <li>In the <strong>User:</strong> textbox, enter <code>ec2-user</code> (the same user with which you connected to the instance before).</li>
+  <li>Click the <strong>Browse…</strong> button to the right of the <strong>Key file:</strong> textbox. Navigate to and select the .pem file which you previously used to connect to your EC2 instance.</li>
+  <li>Click the <strong>Connect</strong> button at the bottom of the dialog. <strong>Done!</strong></li>
+</ol>
+
+<p>Assuming everything was entered properly, FileZilla will connect to your EC2 instance. You’ll see the right side of the application (the <em>Remote site</em> panes) reload to display the current contents of your instance. At this point, you can use FileZilla to navigate to the site root which you previously set up in the VirtualHost config - all of your HTML/CSS/JavaScript files will be uploaded to the site root, as directed in each assignment.</p>
+
+<h3 id="using-cyberduck">Using Cyberduck</h3>
+
+<p>Cyberduck (<a href="https://cyberduck.io/">https://cyberduck.io/</a>) is another free SFTP client and is available for most operating systems. Follow the steps below to connect to your EC2 instance using Cyberduck:</p>
+
+<ol>
+  <li>In the main toolbar, click <strong>Open Connection</strong>. A dialog will open.</li>
+  <li>In the dialog, click the first dropdown and select <em>SFTP (SSH File Transfer Protocol)</em>.</li>
+  <li>In the <strong>Server:</strong> textbox, enter your domain or the public IP address for your instance - either is acceptable.</li>
+  <li>In the <strong>Port:</strong> textbox, enter the value <code>22</code> - this is the port normally used for SFTP connections.</li>
+  <li>In the <strong>Username:</strong> textbox, enter <code>ec2-user</code> (the same user with which you connected to the instance before).</li>
+  <li>Leave the <strong>Password:</strong> textbox blank.</li>
+  <li>Click the dropdown next to <strong>SSH Private Key:</strong>. Navigate to and select the .pem file which you previously used to connect to your EC2 instance.</li>
+  <li>Click the <strong>Connect</strong> button. <strong>Done!</strong></li>
+</ol>
+
+<p>Assuming everything was entered properly, Cyberduck will connect to your EC2 instance. You’ll see the application reload to display the current contents of your instance. At this point, you can use Cyberduck to navigate to the site root which you previously set up in the VirtualHost config - all of your HTML/CSS/JavaScript files will be uploaded to the site root, as directed in each assignment.</p>
+
+<h2 id="take-a-snapshot-optional">Take a Snapshot! (Optional)</h2>
+
+<p>Now that your instance is up and running and properly configured, it’s a good idea to save a backup of the current state of the server. For more information, visit</p>
+
+<p><a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html">https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html</a></p>
+
+<h2 id="keep-an-eye-on-billing-important"><strong>Keep an Eye on Billing! (IMPORTANT)</strong></h2>
+
+<p>Your EC2 instance will normally not accrue any charges, since the AMI chosen belongs to the <em>Free Tier Eligible</em> list.</p>
+
+<p>The Elastic IP address <strong>will</strong> accrue charges, so pay attention to the balance left in your AWS Academy account. Once your balance reaches zero, you will not be able to continue the AWS Academy coursework.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>You may also visit the following link for a more detailed walk-through: <a href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh\_install\_firstuse">https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse</a> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>Visit <a href="https://linuxize.com/post/how-to-use-nano-text-editor/">https://linuxize.com/post/how-to-use-nano-text-editor/</a> for a simple explanation of the nano editor and to learn the basic commands <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>Exit nano using <code>Ctrl+x</code>, press <code>y</code> and <code>Enter</code> to confirm the save, then <code>Enter</code> to accept the file name <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+     
+        </main>
+     
+        <footer class="page-content">
+            <div class="text-center container-fluid">
+                <div class="p-4">
+                    GRCC | TLC &copy; 2023 - 2024 &bull; 
+                    Syntax highlighting by <a href="https://prismjs.com/" class="text-bb-brand">Prism.js</a> 
+                    using <a href="https://andrewlock.net" class="text-bb-brand">Andrew Lock</a>'s Visual Studio theme.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="bb-scroll-widget">
+        <a href="#" class="back-to-top">
+            <span class="fa-stack">
+                <i class="fas fa-square fa-stack-2x"></i>
+                <i class="fas fa-arrow-up fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha256-E4RlfxwyJVmkkk0szw7LYJxuPlp6evtPSBDlWHsYYL8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+    
+    <script src="./assets/js/bootbox.all.min.js"></script>
+    <script src="./assets/js/prism.js"></script>
+    <script src="./assets/js/main.js"></script>
+
+      
+</body>
+
+</html>
