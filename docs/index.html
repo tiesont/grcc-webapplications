@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="GRCC,TLC,ruby,python,CIS" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png" />
+    <link rel="manifest" href="./site.webmanifest" />
+    
+    <title> &mdash; GRCC Technology Learning Center</title>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Bree+Serif&display=swap" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+    <link rel="stylesheet" href="./assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="./assets/css/prism.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+
+    
+</head>
+<body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 navbar-expand-sm">
+    <a class="navbar-brand ps-3" href="./index.html">GRCC Technology Learning Center</a>
+    <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="navbar-nav">
+            <li class="nav-item active text-nowrap">
+                <a class="nav-link" href="./index.html">Docs</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="./examples.html">Examples</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+    
+    <div class="container-fluid">   
+        <nav class="d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+        <h4 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1">
+            Tutorials
+        </h4>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1">
+            CIS-241 / CIS-247
+        </h6>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="./setting-up-ec2-tutorial">Setting Up an AWS EC2 LAMP Server</a></li>
+            <li class="nav-item"><a class="nav-link" href="./running-automated-ec2-script">Automated AWS EC2 Installation</a></li>
+        </ul>
+
+        <h4 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1">
+            Examples
+        </h4>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#">---</a></li>
+        </ul>
+    </div>
+</nav>
+
+        <div class="main-content">
+            <main role="main" class=" px-4">   
+                <h1 id="welcome">Welcome!</h1>
+
+<p>The following content is maintained on behalf of the GRCC Technology Learning Center. This website is intended as a 
+educational resource for students of the Computer Information Systems (CIS) and Mechanical, Drafting, &amp; Engineering departments. The 
+content herein is free for anyone to browse and use, but be aware that the content is targeted to our coursework 
+and may not reflect other college or university outcomes or best practices as followed by the general development community.</p>
+
+<h2 id="cis">CIS</h2>
+
+<h3 id="web-development">Web Development</h3>
+
+<p>CIS-241 &amp; CIS-247 utilize Amazon Web Services (AWS) and it’s Elastic Cloud Computing (EC2) service to host a Linux 
+web server virtual machine (VM) to which students deploy their code. This process can be tricky, so we’ve developed the 
+following tutorials:</p>
+
+<ul>
+  <li>
+    <p><a href="./setting-up-ec2-tutorial">Setting Up an AWS EC2 LAMP Server</a>: a step-by-step guide to set up an EC2 instance, including setting 
+up a custom domain.</p>
+  </li>
+  <li>
+    <p><a href="./running-automated-ec2-script">Automated AWS EC2 Installation</a>: a Bash script which can be run on an EC2 instance to automate the 
+steps described in the <em>Setting Up an AWS EC2 LAMP Server</em> tutorial.</p>
+  </li>
+</ul>
+     
+            </main>
+         
+            <footer class="page-content border-top my-2">
+                <div class="text-center container-fluid">
+                    <p class="mb-1">
+                        GRCC Technology Learning Center &copy; 2023 - 2024
+                    </p>
+                    <p class="mb-0">
+                        Syntax highlighting by <a href="https://prismjs.com/">Prism.js</a> using <a href="https://andrewlock.net">Andrew Lock</a>'s Visual Studio theme.
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <div class="bb-scroll-widget">
+        <a href="#" class="back-to-top">
+            <span class="fa-stack">
+                <i class="fas fa-square fa-stack-2x"></i>
+                <i class="fas fa-arrow-up fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha256-E4RlfxwyJVmkkk0szw7LYJxuPlp6evtPSBDlWHsYYL8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+    
+    <script src="./assets/js/bootbox.all.min.js"></script>
+    <script src="./assets/js/prism.js"></script>
+    <script src="./assets/js/main.js"></script>
+
+      
+</body>
+
+</html>

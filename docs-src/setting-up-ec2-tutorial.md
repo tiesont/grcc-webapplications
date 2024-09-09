@@ -1,3 +1,9 @@
+---
+layout: default
+title: Setting Up an AWS EC2 LAMP Server
+pageKey: setting-up-ec2-tutorial
+---
+
 # Setting Up an AWS EC2 LAMP Server
 
 ## Get a (free or cheap\!) DNS Name For Your Web Apps
@@ -21,7 +27,7 @@ The content which follows contains commands which you will enter to install vari
 
 Under *Application and OS Images*, be sure to choose **Amazon Linux 2 AMI (HVM)**. Selecting a different AMI increases the difficulty of configuring the instance, as some of the options will not match the instructions given in the lecture.
 
-![AMI selection](./images/os-selection.png)
+![AMI selection](./assets/images/os-selection.png)
 
 If you're creating this instance as part of your AWS Academy training, you should have an existing SSH key, called *vockey.ppk*, which you can download from your AWS Academy portal. If not, you can create a new SSH key now, following the instructions below.
 
@@ -29,11 +35,11 @@ If you're creating this instance as part of your AWS Academy training, you shoul
 
 Under the *Key Pair (login)* section, click the *Create new key pair* button:
 
-![Key pair options](./images/key-pair.png)
+![Key pair options](./assets/images/key-pair.png)
 
 In the dialog which opens, give your key a name:
 
-![Key pair dialog](./images/key-pair-dialog.png)
+![Key pair dialog](./assets/images/key-pair-dialog.png)
 
 For this document, we named the file *grcc-rsa-keyfile.pem*. Click *Create key pair* and select an easy-to-find location for your file when prompted. We recommend saving it to the root of the folder where your course files are located.
 
@@ -45,15 +51,17 @@ To use your key file in an SSH connection, you'll need to make sure that the fil
 
 The process for setting file permissions in the Linux and the macOS operating systems are the same. First, open the terminal application. Then, enter the following command (replacing *key-pair-name.pem* with the full path to your key file):
 
-`chmod 400 key-pair-name.pem`
+```shell
+chmod 400 key-pair-name.pem
+```
 
 **That's it\!** Continue to *Completing Set Up*.
 
 #### Windows
 
 1. Locate the key file in Windows Explorer.   
-1. Right-click on the file, then select the ***Properties*** option.   
-1. In the dialog which opens, click the ***Security*** tab and click the **Advanced** button.   
+1. Right-click on the file, then select the **Properties** option.   
+1. In the dialog which opens, click the **Security** tab and click the **Advanced** button.   
 1. Click the **Disable inheritance** button.   
 1. Remove access to all users except for the current user:  
    1. Click on a user to remove.  
@@ -68,26 +76,30 @@ The process for setting file permissions in the Linux and the macOS operating sy
 
 **Almost done\!** Under *Network Settings*, ensure that all three Firewall options are checked:
 
-![Network settings](./images/network-settings.png)
+![Network settings](./assets/images/network-settings.png)
 
 This will allow the wizard to create the correct inbound rules to allow your EC2 instance to receive HTTP and HTTPS requests.
 
 Click the *Launch instance* button to initiate the creation of your EC2 instance\! Once the process completes, find and click on the instance identifier (*i-xxxxxxxxxxxxx*) in the success message:
 
-![Success dialog](./images/success-with-instance-link.png)
+![Success dialog](./assets/images/success-with-instance-link.png)
 
 Clicking that link will take you to the overview of your new instance:
 
-![Instance dashboard](./images/instance-dashboard.png)
+![Instance dashboard](./assets/images/instance-dashboard.png)
 
-**Next up:** allocating a “permanent” IP address to your instance using Elastic IP.
+**Next up:** allocating a "permanent" IP address to your instance using Elastic IP.
 
-### Allocate an Elastic IP address and associate it with your EC2 instance.
+### Allocate an Elastic IP address and associate it with your EC2 instance
+
+Our next step is to assign a permanent IP address to your EC2 instance - this is required to install a SSL/TLS certificate, which we'll need in order to 
+enable HTTPS (an encrypted version of a standard page request). While not strictly required, HTTPS is considered best practice, especially when installing tools 
+such as phpMyAdmin for managing our databases (you'll do this step later in the tutorial).
 
 #### Allocate an Elastic IP address
 
 1. On the left side of your browser window, look for the section labeled *Network & Security*, and then click on the *Elastic IPs* option:  
-   ![Network security menu](./images/network-security-menu.png)  
+   ![Network security menu](./assets/images/network-security-menu.png)  
 1. In the upper right corner of the next page, click on *Allocate Elastic IP address*.   
 1. Leave all settings at their default and click the *Allocate* button. This will allocate an IP address to your account from the pool of available IP addresses.   
 1. Once the page has reloaded, check the box for your new IP address, then find and click the *Actions* button in the upper right corner of your browser.   
@@ -95,7 +107,7 @@ Clicking that link will take you to the overview of your new instance:
 1. In the page which loads, leave the *Resource* type as *Instance*.  
 1. For the *Instance* field, click in the textbox labeled *Choose an instance*, which will load all of your current EC2 instances (you should have only one instance at this time).   
 1. Choose your running instance, then click the *Associate* button.  
-1. Your instance now has a “permanent” public IP address \- we'll use this from now on.
+1. Your instance now has a "permanent" public IP address \- we'll use this from now on.
 
 #### Point Your Domain at Your EC2 Instance
 
@@ -109,7 +121,6 @@ In your domain manager, create an A record using your public (Elastic IP) addres
   * **Host:** www  
   * **Target:** yourdomain.tld (replace with the domain you've registered)  
     
-
 Your settings will vary based on the domain registrar where you acquired the domain.
 
 ## Connecting to Your New Server
@@ -120,45 +131,45 @@ You can connect to your server in many ways, but let's look at two of them, WinS
 
 WinSCP is an integrated FTP and SSH client. If you are on a college laptop or on-campus computer, WinSCP is already installed. If you need to download it, you can do so from their website [https://winscp.net/eng/downloads.php](https://winscp.net/eng/downloads.php) and install it as you normally would.
 
-When you open WinSCP, you will see a Login window. In the Host name field, enter your domain name. In the User name field, enter ec2-user and leave the password field blank. Then, click the Advanced drop-down menu.   
+When you open WinSCP, you will see a Login window. In the **Host** name field, enter your domain name. In the **Username** field, enter `ec2-user` and leave the password field blank. Then, click the **Advanced** drop-down menu.   
 
-![](./images/setup.png)
+![](./assets/images/setup.png)
 
-In the Advanced Site Settings window, use the navigation panel on the left and click on Authentication, located under SSH, as shown below. We need to create a .ppk file from the .pem file you saved earlier. Open the Tools drop-down menu and choose Generate New Key Pair with PuTTYgen.   
+In the _Advanced Site Settings_ window, use the navigation panel on the left and click on **Authentication**, located under _SSH_, as shown below. We need to create a .ppk file from the .pem file you saved earlier. Open the **Tools** drop-down menu and choose **Generate New Key Pair with PuTTYgen**.   
 
-![](./images/advanced-settings.png)
+![](./assets/images/advanced-settings.png)
 
-In the PuTTY Key Generator, click the Load button. Navigate to where your .pem file is located and open it.   
+In the PuTTY Key Generator, click the **Load** button. Navigate to where your .pem file is located and open it.   
 
-![](./images/putty-keygen1.png)
+![](./assets/images/putty-keygen1.png)
 
-The window will change to look like the image below. If you wish to secure your server further, enter a secure password in the Key passphrase field and again in the Confirm passphrase field. You will be prompted for this password each time you login. You may leave the field blank if you wish, but it will be less secure, and a warning will appear when you save the private key. To save the private key, click the Save private key button. Like your .pem file, save it somewhere secure where you can find it again. On a campus computer, you should save it to your J:/ drive in order to access it later.  
+The window will change to look like the image below. If you wish to secure your server further, enter a secure password in the **Key passphrase** field and again in the **Confirm passphrase** field. You will be prompted for this password each time you login. You may leave the field blank if you wish, but it will be less secure, and a warning will appear when you save the private key. To save the private key, click the **Save private key** button. Like your .pem file, save it somewhere secure where you can find it again. On a campus computer, you should save it to your `J:\\` drive in order to access it later.  
 
-![](./images/putty-keygen2.png)
+![](./assets/images/putty-keygen2.png)
 
-Back in the Advanced Site Settings window, the Private key file field should be populated with your .ppk file. If it isn't, use the three dots menu to choose your .ppk file. It should look like the image below. Click OK to continue.  
+Back in the _Advanced Site Settings_ window, the **Private key file** field should be populated with your .ppk file. If it isn't, use the three dots menu to choose your .ppk file. It should look like the image below. Click **OK** to continue.  
 
-![](./images/advanced-settings.png)
+![](./assets/images/advanced-settings.png)
 
-Double check your settings below and click Save.  
+Double check your settings below and click **Save**.  
 
-![](./images/setup.png) 
+![](./assets/images/setup.png) 
 
-In the Save session as site dialog window, you can choose to change your Site name or leave it as default. Then, click OK to finish saving it.  
+In the _Save session as site_ dialog window, you can choose to change your **Site name** or leave it as default. Then, click **OK** to finish saving it.  
 
-![](./images/savesession.png)
+![](./assets/images/savesession.png)
 
-Now, whenever you open WinSCP, your Login window should look like this. Choose Login to log onto your server. The first time you do, you may be prompted to confirm some settings. If you entered a password for your key file, you may need to enter it.   
+Now, whenever you open WinSCP, your Login window should look like this. Choose **Login** to log onto your server. The first time you do, you may be prompted to confirm some settings. If you entered a password for your key file, you may need to enter it.   
 
-![](./images/savesession-login.png.png)
+![](./assets/images/savesession-login.png)
 
-Once you clear any prompts, you are connected. You will now see the main window as shown below. The left side is your local computer, and the right side is your server. The location within your file system is shown in the blue bar above the file tree. It should look similar to FileZilla, which most of you are familiar with from your HTML classes. To connect to your server via SSH, you will need to click on the Open session in PuTTY button. 
+Once you clear any prompts, you are connected. You will now see the main window as shown below. The left side is your local computer, and the right side is your server. The location within your file system is shown in the blue bar above the file tree. It should look similar to FileZilla, which most of you are familiar with from your HTML classes. To connect to your server via SSH, you will need to click on the **Open session in PuTTY** button. 
 
-![](./images/opensession.png)
+![](./assets/images/opensession.png)
 
 Again, the first time you do so, you may need to confirm some things in a series of dialog boxes. If you entered a password for your key file, you will need to enter it. If you see the terminal as shown below, you are connected and may skip to the *Set Up LAMP and phpMyAdmin* section.  
 
-![](./images/putty-cli.png)
+![](./assets/images/putty-cli.png)
 
 ### Using Windows
 
@@ -176,11 +187,15 @@ The command line and PowerShell are already installed on your computer. Terminal
 
 Once your terminal is running, you'll need to verify if the ssh command is available. In the terminal, type:
 
-`ssh`
+```shell
+ssh
+```
 
 If you see a “usage” list, then you can proceed to *Set Up LAMP and phpMyAdmin*. If you see an error message, you'll need to install OpenSSH. To install OpenSSH, type (or copy and paste) the following command into the PowerShell terminal[^1]:
 
-`Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0`
+```shell
+Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
+```
 
 You'll see a brief “status bar” message as the tool installs. Once the tool has finished installing you are ready to connect to your EC2 instance\! 
 
@@ -188,15 +203,19 @@ You'll see a brief “status bar” message as the tool installs. Once the tool 
 
 To connect to your EC2 instance from an Apple computer, you'll use the Terminal application, found in your *Applications* list. An SSH client should already be installed \- you can verify this by launching Terminal and then typing in the following command:
 
-`ssh`
+```shell
+ssh
+```
 
 You should see a help list of arguments for the ssh command.
 
 ### Using Linux
 
-To connect to your EC2 instance from a Linux computer, you'll use the terminal (or *shell*) application, typically found in your *Administration* software list \- the location will vary depending on your Linux distribution and the desktop manager which was installed during setup (consult the documentation for your Linux distribution for more details). An SSH client should already be installed \- you can verify this by launching the terminal (press the `Ctrl`\+`Alt`\+`t` keys to open the terminal) and then typing in the following command:
+To connect to your EC2 instance from a Linux computer, you'll use the terminal (or *shell*) application, typically found in your *Administration* software list \- the location will vary depending on your Linux distribution and the desktop manager which was installed during setup (consult the documentation for your Linux distribution for more details). An SSH client should already be installed \- you can verify this by launching the terminal (press the <kbd>Ctrl</kbd>\+<kbd>Alt</kbd>\+<kbd>T</kbd> keys to open the terminal) and then typing in the following command:
 
-`ssh`
+```shell
+ssh
+```
 
 You should see a help list of arguments for the ssh command.
 
@@ -204,7 +223,9 @@ You should see a help list of arguments for the ssh command.
 
 Regardless of the operating system from which you're connecting, the commands which follow will be the same. Within your chosen terminal application, type the following command, replacing *\[/path/key-pair-name.pem\]* with the path to the PEM file you created above and replacing *\[elastic IP address\]* with your site's public IP address:
 
-`ssh -i [/path/key-pair-name.pem] ec2-user@[elastic IP address]`
+```shell
+ssh -i [/path/key-pair-name.pem] ec2-user@[elastic IP address]
+```
 
 **You're now connected\!** When you're ready, continue to the next step, *Set Up LAMP and phpMyAdmin*.
 
@@ -220,21 +241,31 @@ We're including the relevant commands here, but for brevity, we're omitting the 
 
 If not already connected, connect to your EC2 instance (substituting your values): 
 
-`ssh -i [/path/key-pair-name.pem] ec2-user@[elastic IP address]`
+```shell
+ssh -i [/path/key-pair-name.pem] ec2-user@[elastic IP address]
+```
 
 ### Install Web Server Software
 
 Run the following commands (each line is a separate command \- run them one at a time):
 
-`sudo yum update -y`
+```shell
+sudo yum update -y
+```
 
-`sudo amazon-linux-extras install mariadb10.5`
+```shell
+sudo amazon-linux-extras install mariadb10.5
+```
 
-`sudo amazon-linux-extras install php8.2`
+```shell
+sudo amazon-linux-extras install php8.2
+```
 
-`sudo yum install -y httpd`
+```shell
+sudo yum install -y httpd
+```
 
-When prompted, enter 'y' to allow the installation of each module.
+When prompted, enter `y` to allow the installation of each module.
 
 At this point, you've installed MariaDB (a relational database software), PHP (for creating dynamic websites \- you'll use this in CIS-247), and Apache \- the web server software that allows your EC2 instance to respond to requests from your browser. **Good job\!**
 
@@ -244,15 +275,21 @@ We've installed the software we need in order for your EC2 instance to act as a 
 
 Run the following commands (each line is a separate command \- run them one at a time):
 
-`sudo systemctl start httpd`
+```shell
+sudo systemctl start httpd
+```
 
-`sudo systemctl enable httpd`
+```shell
+sudo systemctl enable httpd
+```
 
-`sudo systemctl is-enabled httpd`
+```shell
+sudo systemctl is-enabled httpd
+```
 
-The last command should print “enabled” \- your Apache module is now running\! Open your browser and type your domain into the navigation bar, then hit Enter. Your domain should load the Apache test page:
+The last command should print "enabled" \- your Apache module is now running\! Open your browser and type your domain into the navigation bar, then hit <kbd>Enter</kbd>. Your domain should load the Apache test page:
 
-![Apache test page](./images/apache-test-page.png)
+![Apache test page](./assets/images/apache-test-page.png)
 
 **Congratulations\!** You now have a working web server\! We're not quite done yet \- we need to update permissions on some files, and make sure that files which you will upload later have the correct permissions automatically.
 
@@ -260,15 +297,23 @@ The last command should print “enabled” \- your Apache module is now running
 
 Run the following commands (each line is a separate command \- run them one at a time):
 
-`sudo usermod -a -G apache ec2-user`
+```shell
+sudo usermod -a -G apache ec2-user
+```
 
-`exit`
+```shell
+exit
+```
 
 That last command, *exit*, will end your SSH session \- reconnect, and then continue with:
 
-`sudo chown -R ec2-user:apache /var/www`
+```shell
+sudo chown -R ec2-user:apache /var/www
+```
 
-`find /var/www -type f -exec sudo chmod 0664 {} \;`
+```shell
+find /var/www -type f -exec sudo chmod 0664 {} \;
+```
 
 At this point, you've done the minimum to allow your web server to serve your web pages as you upload them. The next step is to configure your web server to use HTTPS (a secure version of HTTP), taking advantage of the free certificate service Let's Encrypt.
 
@@ -282,27 +327,37 @@ As in previous steps, we'll skip most of the explanation around the commands you
 
 Run the following commands (each line is a separate command \- run them one at a time):
 
-`sudo amazon-linux-extras install epel`
+```shell
+sudo amazon-linux-extras install epel
+```
 
-`sudo yum install certbot-apache`
+```shell
+sudo yum install certbot-apache
+```
 
-When prompted, enter 'y' to allow the installation of each module. **Before we can run Certbot, we need to set up our virtual host configuration.**
+When prompted, enter `y` to allow the installation of each module. **Before we can run Certbot, we need to set up our virtual host configuration.**
 
 #### Setup Virtual Host
 
 Run the following commands, substituting the domain which you registered for *your\_domain* (each line is a separate command \- run them one at a time):
 
-`sudo mkdir -p /var/www/your_domain/html`
+```shell
+sudo mkdir -p /var/www/your_domain/html
+```
 
-`sudo mkdir -p /var/www/your_domain/log`
+```shell
+sudo mkdir -p /var/www/your_domain/log
+```
 
 This will create the directories to which you'll upload your homework files, later. To verify that our virtual host is working, we'll create a simple test page, using **nano[^2]**:
 
-`sudo nano /var/www/your_domain/html/index.html`
+```shell
+sudo nano /var/www/your_domain/html/index.html
+```
 
 Copy and paste the following markup:
 
-```
+```html
 <html>  
   <head>  
 	  <title>Welcome to your website!</title>  
@@ -317,29 +372,39 @@ Again, replace your\_domain with your domain name. Save and exit[^3].
 
 Next, we'll create directories for storing our virtual host configuration files. Enter the following command:
 
-`sudo mkdir /etc/httpd/sites-available`
+```shell
+sudo mkdir /etc/httpd/sites-available
+```
 
 This creates a directory for storing virtual hosts we *could* use. Next, enter the following command:
 
-`sudo mkdir /etc/httpd/sites-enabled`
+```shell
+sudo mkdir /etc/httpd/sites-enabled
+```
 
 This directory stores the configuration file for **enabled** virtual hosts; that is, the *active* virtual hosts. 
 
 Next, we need to update the Apache configuration file to tell it to look for our virtual host configurations. We'll use nano to update the file:
 
-`sudo nano /etc/httpd/conf/httpd.conf`
+```shell
+sudo nano /etc/httpd/conf/httpd.conf
+```
 
-Scroll to the end of the file (using your UP and DOWN arrow keys) and add the following line:
+Scroll to the end of the file (using your <kbd>&uarr;</kbd> UP and <kbd>&darr;</kbd> DOWN arrow keys) and add the following line:
 
-`IncludeOptional sites-enabled/*.conf`
+```apacheconf
+IncludeOptional sites-enabled/*.conf
+```
 
 **Save and exit.** From now on, any configuration files found in the *sites-enabled* directory will be loaded when Apache starts. Let's add a configuration file for our domain (remember to replace *your\_domain* with your domain name):
 
-`sudo nano /etc/httpd/sites-available/your_domain.conf`
+```shell
+sudo nano /etc/httpd/sites-available/your_domain.conf
+```
 
 Copy and paste the following code:
 
-```
+```apacheconf
 <VirtualHost *:80>  
     ServerName www.your_domain  
     ServerAlias your_domain  
@@ -353,13 +418,17 @@ As usual, replace *your\_domain* with your domain name. **Save and exit.**
 
 To complete the virtual host setup, run the following command (replacing *your\_domain* with your domain name):
 
-`sudo ln -s /etc/httpd/sites-available/your_domain.conf /etc/httpd/sites-enabled/your_domain.conf`
+```shell
+sudo ln -s /etc/httpd/sites-available/your_domain.conf /etc/httpd/sites-enabled/your_domain.conf
+```
 
 This creates a symlink, or *symbolic link*, for your configuration file. To put simply, your file isn't actually copied to *sites-ena*bled, but it *appears* to have been copied. This allows Apache to load your virtual configuration without needing to have duplicate versions of the same configuration values. 
 
 **One last step** \- restart Apache using the following command:
 
-`sudo systemctl restart httpd`
+```shell
+sudo systemctl restart httpd
+```
 
 Reload your website in your browser, and you should now see the basic HTML page we created above.
 
@@ -371,7 +440,9 @@ First, make sure that your domain works \- load your website in your browser. If
 
 Run the following command, replacing *your\_domain* with your domain name:
 
-`sudo certbot --apache -d your_domain`
+```shell
+sudo certbot --apache -d your_domain
+```
 
 You'll need to enter a **valid** email address in the first prompt (use either your GRCC student email address or a personal email address \- it's up to you). You **must** accept the second prompt (*Terms of Service*) to continue. The third prompt is optional \- accept if you'd like your email address added to the Electronic Frontier Foundation's mailing list.
 
@@ -385,9 +456,13 @@ With the hard part out of the way, we can complete a few housekeeping tasks. We 
 
 Run the following commands (each line is a separate command \- run them one at a time):
 
-`sudo systemctl start mariadb`
+```shell
+sudo systemctl start mariadb
+```
 
-`sudo mysql_secure_installation`
+```shell
+sudo mysql_secure_installation
+```
 
 The second command initiates a wizard which walks you through setting up the root DB user. When prompted:
 
@@ -402,46 +477,70 @@ The second command initiates a wizard which walks you through setting up the roo
 
 **That's it\! MariaDB is now secure.** We won't be using it right away, so run the following command to shut it down:
 
-`sudo systemctl stop mariadb`
+```shell
+sudo systemctl stop mariadb
+```
 
 You can skip the preceding command if you'd like to experiment with MariaDB later. If you want Maria to always start when the EC2 instance starts, run the following command:
 
-`sudo systemctl enable mariadb`
+```shell
+sudo systemctl enable mariadb
+```
 
 ### Install phpMyAdmin
 
 With MariaDB installed and configured, our last task is to install phpMyAdmin. Run the following commands, replacing *your\_domain* with your domain name:
 
-`sudo yum install php-mbstring php-xml -y`
+```shell
+sudo yum install php-mbstring php-xml -y
+```
 
-`sudo systemctl restart httpd`
+```shell
+sudo systemctl restart httpd
+```
 
-`sudo systemctl restart php-fpm`
+```shell
+sudo systemctl restart php-fpm
+```
 
-`cd /var/www/your_domain/html`
+```shell
+cd /var/www/your_domain/html
+```
 
-`wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz`
+```shell
+wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
+```
 
-`mkdir phpMyAdmin && tar -xvzf phpMyAdmin-latest-all-languages.tar.gz -C phpMyAdmin --strip-components 1`
+```shell
+mkdir phpMyAdmin && tar -xvzf phpMyAdmin-latest-all-languages.tar.gz -C phpMyAdmin --strip-components 1
+```
 
-`rm phpMyAdmin-latest-all-languages.tar.gz`
+```shell
+rm phpMyAdmin-latest-all-languages.tar.gz
+```
 
 If you previously shutdown MariaDB, start it now:
 
-`sudo systemctl start mariadb`
+```shell
+sudo systemctl start mariadb
+```
 
 In your web browser, open the phpMyAdmin UI by visiting:
 
-`https://your_domain/phpMyAdmin`
+```http
+https://your_domain/phpMyAdmin
+```
 
 Replace *your\_domain* with your domain name. You should now see the phpMyAdmin login screen:  
-![phpMyAdmin login screen](./images/phpMyAdmin.png)
+![phpMyAdmin login screen](./assets/images/phpMyAdmin.png)
 
-Login using “root” as the username and using the MariaDB password which you created above. You should now be logged in\! **Great job\!**
+Login using "root" as the username and using the MariaDB password which you created above. You should now be logged in\! **Great job\!**
 
 **That's it\!** There are a few additional steps left to configure phpMyAdmin, which you'll do in CIS-247. For now, you're ready to upload your static files\!
 
 ## Upload Code\!
+
+Now that your EC2 instance is properly configured as a web server, it's time to upload some files! There are many options - we've outlined a few popular tools below.
 
 ### Using WinSCP
 
@@ -495,4 +594,4 @@ The Elastic IP address **will** accrue charges, so pay attention to the balance 
 
 [^2]:  Visit [https://linuxize.com/post/how-to-use-nano-text-editor/](https://linuxize.com/post/how-to-use-nano-text-editor/) for a simple explanation of the nano editor and to learn the basic commands
 
-[^3]:  Exit nano using `Ctrl+x`, press `y` and `Enter` to confirm the save, then `Enter` to accept the file name
+[^3]:  Exit nano using <kbd>CTRL</kbd>\+<kbd>X</kbd>, type `y` and press <kbd>ENTER</kbd> to confirm the save, and then press <kbd>ENTER</kbd> to accept the file name
