@@ -1,3 +1,9 @@
+---
+layout: default
+title: Automated AWS EC2 Installation
+pageKey: running-automated-ec2-script
+---
+
 # GRCC Web Applications Classes
 
 For Grand Rapids Community College's Web Applications I &amp; II (CIS 241 &amp; CIS 247) classes. 
@@ -33,7 +39,7 @@ By default, when you SSH into your server as `ec2-user`, you will be at the `ec2
 
 Download `install-lamp-secure.sh` from this repository using the following command:
 
-```
+```shell
 wget https://github.com/christopherpowers1/grcc-webapplications/raw/main/install-lamp-secure.sh
 ```
 
@@ -41,19 +47,19 @@ wget https://github.com/christopherpowers1/grcc-webapplications/raw/main/install
 
 If you prefer, you can create the script using the built-in text editor in Linux called Nano. ([How to Use Nano (external)](https://linuxize.com/post/how-to-use-nano-text-editor/)) 
 
-1. On your Linux terminal screen, verify you are in the `ec2-user` home directory `~` by entering: 
-```
+1. On your Linux terminal screen, verify you are in the `ec2-user` home directory ('~') by entering: 
+```shell
 cd ~
 ```
+
 2. Create a new file using `nano` called `install-lamp-secure.sh`:
-```
+```shell
 sudo nano install-lamp-secure.sh
 ```
-
 3. Open this on GitHub in a new tab: [install-lamp-secure.sh](./install-lamp-secure.sh) (right click to open in new tab).
-4. Copy the script by clicking the copy button in the upper right corner next to the <kbd>Raw</kbd> button or select all of the text in the code box and press <kbd>Ctrl + C</kbd> to copy.
-5. Back in 'nano', paste the script into the text editor.
-6. Save the file by pressing <kbd>Ctrl + X</kbd> then press <kbd>y</kbd> then <kbd>Enter</kbd> to confirm the save, then <kbd>Enter</kbd> to accept the file name.
+4. Copy the script by clicking the copy button in the upper right corner next to the **Raw** button or select all of the text in the code box and press <kbd>Ctrl</kbd> \+ <kbd>C</kbd> to copy.
+5. Back in nano, paste the script into the text editor.
+6. Save the file by pressing <kbd>Ctrl</kbd> \+ <kbd>X</kbd>, type `y`, and then <kbd>Enter</kbd> to confirm the save. Hit <kbd>Enter</kbd> to accept the file name.
 
 You're now ready to run the script.
 
@@ -71,17 +77,20 @@ You will also be prompted for the domain name you will be using for the class. B
 
 (If you aren't already, connect to your server using SSH or the AWS Connect function.)
 
-Verify you are in the `ec2-user` home directory `~`:
-```
+Verify you are in the `ec2-user` home directory ('~'):
+
+```shell
 cd ~
 ```
 
 To run the script, we will use the bash command:
-```
+
+```shell
 bash install-lamp-secure.sh
 ```
 
 If your script doesn't run, you may need to make it executable:
-```
+
+```shell
 chmod +x install-lamp-secure.sh
 ```

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="GRCC,TLC,ruby,python,CIS" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png" />
+    <link rel="manifest" href="./site.webmanifest" />
+    
+    <title>Automated AWS EC2 Installation &mdash; GRCC Technology Learning Center</title>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Bree+Serif&display=swap" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+    <link rel="stylesheet" href="./assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="./assets/css/prism.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+
+    
+</head>
+<body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 navbar-expand-sm">
+    <a class="navbar-brand ps-3" href="./index.html">GRCC Technology Learning Center</a>
+    <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="navbar-nav">
+            <li class="nav-item active text-nowrap">
+                <a class="nav-link" href="./index.html">Docs</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="./examples.html">Examples</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+    
+    <div class="container-fluid">   
+        <nav class="d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+        <h4 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1">
+            Tutorials
+        </h4>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1">
+            CIS-241 / CIS-247
+        </h6>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="./setting-up-ec2-tutorial">Setting Up an AWS EC2 LAMP Server</a></li>
+            <li class="nav-item"><a class="nav-link" href="./running-automated-ec2-script">Automated AWS EC2 Installation</a></li>
+        </ul>
+
+        <h4 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1">
+            Examples
+        </h4>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#">---</a></li>
+        </ul>
+    </div>
+</nav>
+
+        <div class="main-content">
+            <main role="main" class=" px-4">   
+                <h1 id="grcc-web-applications-classes">GRCC Web Applications Classes</h1>
+
+<p>For Grand Rapids Community College’s Web Applications I &amp; II (CIS 241 &amp; CIS 247) classes.</p>
+
+<p>This repository will help students in the creation of a web server with PHP support in Amazon Web Services (AWS) using a provided shell script.</p>
+
+<h2 id="check-your-dns-records">Check Your DNS Records</h2>
+
+<p><em>The Domain Name System (DNS) is the phonebook of the Internet. Humans access information online through domain names, like nytimes.com or espn.com. Web browsers interact through Internet Protocol (IP) addresses. DNS translates domain names to IP addresses so browsers can load Internet resources. The process of updating the servers so that web browsers can find a site is called propagation. Officially, it can take up to 72 hours for a DNS entry to propagate, but often only takes 30 minutes or a few hours at most.</em></p>
+
+<p>Before you begin, check to make sure your DNS records have been set up correctly:</p>
+
+<ol>
+  <li>Go to <a href="https://dnschecker.org/">DNSchecker.org</a></li>
+  <li>In the box under DNS Check, enter your domain name and press <kbd>Enter</kbd> or press the search button.</li>
+  <li>You will get a green check mark if your domain has been added to the DNS server. Once you see green check marks, you are ready to continue.
+    <ul>
+      <li>If you aren’t getting green check marks, double check your instructions on how to setup your DNS records.</li>
+    </ul>
+  </li>
+</ol>
+
+<p><em>Note that Certbot will not be able to create an SSL certificate for a site it is unable to find, so be sure your domain name has propagated before running this script.</em></p>
+
+<h2 id="getting-the-script-onto-your-server">Getting the Script Onto Your Server</h2>
+
+<p><strong>FIRST:</strong> Connect to your server console via SSH (Terminal, WinSCP, Putty, etc.) or the AWS Connect function.</p>
+
+<h3 id="method-1-download-the-script-recommended">METHOD 1: Download the Script (Recommended)</h3>
+
+<h4 id="using-winscp">Using WinSCP</h4>
+
+<p>If you are using WinSCP, you can <a href="install-lamp-secure.sh?raw=1">download <code>install-lamp-secure.sh</code> from this repository</a> and use the WinSCP GUI to upload the file to ec2-user’s personal home directory. This will make it easy to locate when you need to run it in a minute. Once you’ve uploaded the script file, click on the <code>Open session in PuTTY</code> button and move on to <a href="#running-the-script">Running the Script</a></p>
+
+<h4 id="using-the-terminal">Using the Terminal</h4>
+
+<p>By default, when you SSH into your server as <code>ec2-user</code>, you will be at the <code>ec2-user</code> home directory, which will be noted with a tilde (~).</p>
+
+<p>Download <code>install-lamp-secure.sh</code> from this repository using the following command:</p>
+
+<pre><code class="language-shell">wget https://github.com/christopherpowers1/grcc-webapplications/raw/main/install-lamp-secure.sh
+</code></pre>
+
+<h3 id="method-2-use-nano-to-create-the-script">METHOD 2: Use <code>nano</code> to Create the Script</h3>
+
+<p>If you prefer, you can create the script using the built-in text editor in Linux called Nano. (<a href="https://linuxize.com/post/how-to-use-nano-text-editor/">How to Use Nano (external)</a>)</p>
+
+<ol>
+  <li>On your Linux terminal screen, verify you are in the <code>ec2-user</code> home directory (‘~’) by entering:
+    <pre><code class="language-shell">cd ~
+</code></pre>
+  </li>
+  <li>Create a new file using <code>nano</code> called <code>install-lamp-secure.sh</code>:
+    <pre><code class="language-shell">sudo nano install-lamp-secure.sh
+</code></pre>
+  </li>
+  <li>Open this on GitHub in a new tab: <a href="./install-lamp-secure.sh">install-lamp-secure.sh</a> (right click to open in new tab).</li>
+  <li>Copy the script by clicking the copy button in the upper right corner next to the <strong>Raw</strong> button or select all of the text in the code box and press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy.</li>
+  <li>Back in nano, paste the script into the text editor.</li>
+  <li>Save the file by pressing <kbd>Ctrl</kbd> + <kbd>X</kbd>, type <code>y</code>, and then <kbd>Enter</kbd> to confirm the save. Hit <kbd>Enter</kbd> to accept the file name.</li>
+</ol>
+
+<p>You’re now ready to run the script.</p>
+
+<h2 id="running-the-script">Running the Script</h2>
+
+<h3 id="read-this-first">==READ THIS FIRST==</h3>
+
+<p>Watch what the script is doing as it runs. The script will display pertinent information as it goes along. At several points, it will pause and either give you information or ask you for information.</p>
+
+<p>It will ask you to check to see if your server is running. AT THAT POINT, IF YOUR SERVER IS NOT RUNNING, DO NOT CONTINUE UNTIL IT IS WORKING. The Domain Name Server (DNS) needs to be able to resolve before Certbot can register your domain for the SSL certificate. See the <a href="#check-your-dns-records">Check Your DNS Records</a> section at the top of this readme file for details.</p>
+
+<p>You will also be prompted for the domain name you will be using for the class. Be sure to include the TLD portion because what you enter will be used in Certbot to register the domain for SSL certification. For example: <code>your-domain.xyz</code> not <code>your-domain</code></p>
+
+<h3 id="actually-run-the-script">Actually Run the Script</h3>
+
+<p>(If you aren’t already, connect to your server using SSH or the AWS Connect function.)</p>
+
+<p>Verify you are in the <code>ec2-user</code> home directory (‘~’):</p>
+
+<pre><code class="language-shell">cd ~
+</code></pre>
+
+<p>To run the script, we will use the bash command:</p>
+
+<pre><code class="language-shell">bash install-lamp-secure.sh
+</code></pre>
+
+<p>If your script doesn’t run, you may need to make it executable:</p>
+
+<pre><code class="language-shell">chmod +x install-lamp-secure.sh
+</code></pre>
+     
+            </main>
+         
+            <footer class="page-content border-top my-2">
+                <div class="text-center container-fluid">
+                    <p class="mb-1">
+                        GRCC Technology Learning Center &copy; 2023 - 2024
+                    </p>
+                    <p class="mb-0">
+                        Syntax highlighting by <a href="https://prismjs.com/">Prism.js</a> using <a href="https://andrewlock.net">Andrew Lock</a>'s Visual Studio theme.
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <div class="bb-scroll-widget">
+        <a href="#" class="back-to-top">
+            <span class="fa-stack">
+                <i class="fas fa-square fa-stack-2x"></i>
+                <i class="fas fa-arrow-up fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha256-E4RlfxwyJVmkkk0szw7LYJxuPlp6evtPSBDlWHsYYL8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+    
+    <script src="./assets/js/bootbox.all.min.js"></script>
+    <script src="./assets/js/prism.js"></script>
+    <script src="./assets/js/main.js"></script>
+
+      
+</body>
+
+</html>
